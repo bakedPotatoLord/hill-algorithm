@@ -16,11 +16,17 @@ const pointArr = Array.from(points,(v)=>new Point(v[0],v[1]))
 
 const climber = new Climber(1,1,pointArr)
 
+climber.climbUntilTop()
 
-while(!climber.update()){}
+console.log(`x: ${climber.x*6}, y: ${climber.y*6}`)
 
-console.log(climber.x,climber.y)
+const realDists = Array.from(pointArr,(v)=>Math.round(v.distTo(climber)*6)+7)
 
+
+
+console.log(realDists)
+
+console.log((climber.sumDist()*6+(6*7))/12)
 
 
 
