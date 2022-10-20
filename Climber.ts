@@ -21,23 +21,28 @@ export class Climber extends Point{
     return distArr.reduce((partialSum, a) => partialSum + a, 0);
   }
 
-  update(){
+  update(precision:number){
     let startingSumDist = this.sumDist()
 
-    if(this.sumDist(0.001,0) < startingSumDist){
-      this.x += 0.001
+    if(this.sumDist(precision,0) < startingSumDist){
+      this.x += precision
       return false
-    }else if(this.sumDist(-0.001,0) < startingSumDist){
-      this.x -= 0.001
+    }else if(this.sumDist(-precision,0) < startingSumDist){
+      this.x -= precision
       return false
-    }else if(this.sumDist(0,0.001) < startingSumDist){
-      this.y += 0.001
+    }else if(this.sumDist(0,precision) < startingSumDist){
+      this.y += precision
       return false
-    }else if(this.sumDist(0,-0.001) < startingSumDist){
-      this.y -= 0.001
+    }else if(this.sumDist(0,-precision) < startingSumDist){
+      this.y -= precision
       return false
     }else{
       return true
     }
+  }
+
+  climbUntilTop(){
+    while(!this.update(0.00001)){}
+    return new Point(this.x,this.y)
   }
 }
